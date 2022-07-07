@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: inherit;
 }
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -36,7 +37,7 @@ nav {
   display: flex;
 }
 
-.lgoin__input {
+.login__input {
   border: none;
   padding: 0.5rem 2rem;
   font-size: 1.6rem;
@@ -50,17 +51,17 @@ nav {
   transition: all 0.3s;
 }
 
-.lgoin__input:focus {
+.login__input:focus {
   outline: none;
   border: 1px solid #ccc;
 }
 
-.lgoin__input::placeholder {
+.login__input::placeholder {
   color: #bbb;
 }
 .login__btn {
   border: none;
-  background-color: none;
+  background: none;
   font-size: 2.2rem;
   color: inherit;
   cursor: pointer;
@@ -86,8 +87,8 @@ nav {
   gap: 2rem;
 
   /* creating fade in/out animation */
-  /* opacity: 0;
-  transition: all 1s; */
+  opacity: 0;
+  transition: all 1s;
 }
 
 .balance {
@@ -116,7 +117,7 @@ nav {
 
 /* Movements */
 .movements {
-  grid-row: s / span 3;
+  grid-row: 2 / span 3;
   background-color: #fff;
   border-radius: 1rem;
   overflow: scroll;
@@ -214,7 +215,7 @@ nav {
 }
 
 .operation--close {
-  background-image: linear-gradient(to top left, #e52a5a, #ff855f);
+  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
 }
 
 h2 {
