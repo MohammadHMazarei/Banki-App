@@ -81,9 +81,9 @@ const displayMovements = function (movements) {
   });
 };
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -116,11 +116,22 @@ const createUsername = function (accs) {
 };
 createUsername(accounts);
 
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+
+  // Display Balanace
+  calcDisplayBalance(acc);
+
+  // Display Summary
+  calcDisplaySummary(acc);
+};
+
 // Events
 let currentAccount;
 
 btnLogin.addEventListener("click", function (e) {
-  //preventing form from submitting
+  //preventing form from submitting to prevent from reloading page
   e.preventDefault();
 
   currentAccount = accounts.find(
@@ -138,13 +149,34 @@ btnLogin.addEventListener("click", function (e) {
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur(); // to remove cursor in pin iput
 
-    // Display movements
-    displayMovements(currentAccount.movements);
+    // Update UI
+    updateUI(currentAccount);
+  }
+});
 
-    // Display Balanace
-    calcDisplayBalance(currentAccount.movements);
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
 
-    // Display Summary
-    calcDisplaySummary(currentAccount);
+  const amount = Number(inputTransferAmount.value);
+  const recieverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value
+  );
+
+  // Clearing input transfer
+  inputTransferAmount.value = inputTransferTo.value = "";
+  inputTransferAmount.blur();
+
+  if (
+    amount > 0 &&
+    recieverAcc &&
+    currentAccount.balance >= amount &&
+    recieverAcc?.username !== currentAccount.username
+  ) {
+    //Doing the transfer
+    currentAccount.movements.push(-amount);
+    recieverAcc.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
   }
 });
