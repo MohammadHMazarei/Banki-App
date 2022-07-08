@@ -61,11 +61,14 @@ const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
 // Functions
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   // First we need to empty movementContainer --> innerHTML is like as setting text to element but it clears all html tag
   containterMovements.innerHTML = "";
 
-  movements.forEach(function (mov, i) {
+  // sort movements but first we need to create a copy of movements with slice method
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -127,9 +130,11 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-// Events
+// global vriables
 let currentAccount;
+let sorted = false;
 
+// Events
 btnLogin.addEventListener("click", function (e) {
   //preventing form from submitting to prevent from reloading page
   e.preventDefault();
@@ -222,4 +227,11 @@ btnClose.addEventListener("click", function (e) {
   // Clear input close fields
   inputCloseUsername.value = inputClosePin.value = "";
   inputClosePin.blur();
+});
+
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
