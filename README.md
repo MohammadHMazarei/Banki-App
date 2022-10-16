@@ -8,4 +8,4 @@ it has a timer and when you switch accounts, transfer or loan money it will be r
 3. Account 3 => username: stw, pin: 3333
 4. Account 4 => username: ss, pin: 4444
 ## Thanks
-Great thanks to my infrastructure Jonas Schmedtmann. all UI desinged by Jonas Schmedtmann
+Special thanks to my course instructor Jonas Schmedtmann. all UI desinged by Jonas Schmedtmann
